@@ -1,4 +1,9 @@
 /* The one and only (master) css file */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
 #nav {
     -webkit-border-radius: 10px;
     border-radius: 10px;
@@ -18,19 +23,7 @@
 }
 
 #resultbox {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: black;
-    color: white;
     font-size: 1.2em;
-
-    height: 30%;
-    overflow-y: scroll;
-}
-.related-topic {
-    color: white;
 }
 .related-topic > a {
     display: block;

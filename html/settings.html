@@ -1,7 +1,7 @@
 <div id="contentbox" class="twelve columns" ng-controller="SettingsController as sc">
     <h1>Settings</h1>
     <div id="options" ng-repeat="option in sc.options">
-        <label for="option_{{option.option}}">{{option.name}}</label>
-        <input id="option_{{option.option}}" type="checkbox" ng-checked="option.checked">
+        <label for="option_{{option.option}}">{{option.text}}</label>
+        <input id="option_{{option.option}}" type="checkbox" ng-model="option.value" ng-change="sc.push()">
     </div>
 </div>

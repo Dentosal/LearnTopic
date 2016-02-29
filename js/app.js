@@ -51,6 +51,13 @@
             });
         };
     }]);
+    app.service('settingsService', function(){
+        // this just contains settings
+        var self = this;
+        self.options = {
+            related: {name: "related", text: "Show related topics", value: true}
+        };
+    });
 
     app.config(function($stateProvider, $urlRouterProvider) {
         // For any unmatched url, redirect to /state1
@@ -68,13 +75,12 @@
         });
     });
 
-    app.controller("ResultController", ["$scope", "searchService", function($scope, $ss) {
+    app.controller("ResultController", ["$scope", "searchService", "settingsService", function($scope, $ss, $settings) {
         var self = this;
         self.data = {}; // current search result
         self.resultOK = false; // is result ok
         self.set = function(data) {
             self.resultOK = Object.keys(data).length !== 0;
-            console.log(self.resultOK, data);
             self.data = data;
         }
         self.update = function() {
@@ -87,6 +93,7 @@
             }
             $("#result").scrollTop(0);
         }
+        self.options = $settings.options; // stupid and kludgy "sync"
     }]);
 
     app.controller("TextController", function($scope) {
@@ -104,14 +111,19 @@
         }
     });
 
-    app.controller("SettingsController", function() {
+    app.controller("SettingsController", ["settingsService", function($settings) {
         var self = this;
-        self.options = [
-            {
-                option: "show_related",
-                name: "Show related topics",
-                checked: true,
+        self.options = {};
+        self.pull = function() {
+            for (var key in $settings.options) {
+                if ($settings.options.hasOwnProperty(key)) {
+                    self.options[key] = $settings.options[key];
+                }
             }
-        ]
-    });
+        }
+        self.push = function() {
+            $settings.options = self.options;
+        }
+        self.pull();
+    }]);
 })();
