@@ -1,6 +1,5 @@
 <!-- Ouch! -->
 <div id="contentbox" ng-controller="ResultController as rc">
-    {{rc.options}}
     <div id="text" ng-controller="TextController as tc" ng-mouseup="rc.update()">
         <div class="row">
             <input ng-show="!tc.text" type="text" class="twelve columns" placeholder="Paste here" ng-model="insert" ng-change="tc.insert()">

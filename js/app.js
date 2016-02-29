@@ -7,12 +7,14 @@
     ]);
 
     app.filter('rawhtml', ['$sce', function($sce){
+        // It's good thing that we can trust our API provider, right?
         return function(val) {
             return $sce.trustAsHtml(val);
         };
     }]);
 
     app.filter('targetblank', function(){
+        // Add target="_black" to all links
         return function(val) {
             if (typeof val === "string") {
                 return val.replace(/<a /, "<a target='_blank'"); // sorry
@@ -22,6 +24,7 @@
     });
 
     app.service('searchService', ["$http", function($http){
+        // DDG API wrapper
         var self = this;
         self.searchstr = "";
         this.search = function(s, cb) {
@@ -61,11 +64,15 @@
     });
 
     app.config(function($stateProvider, $urlRouterProvider) {
-        // For any unmatched url, redirect to /state1
+        // For any unmatched url, redirect to /main
         $urlRouterProvider.otherwise("/main");
 
         // Set up the states
         $stateProvider
+        .state('main', {
+            url: "/main",
+            templateUrl: "html/main.html"
+        })
         .state('text', {
             url: "/text",
             templateUrl: "html/text.html"
@@ -77,6 +84,7 @@
     });
 
     app.controller("ResultController", ["$scope", "searchService", "kludgeService", function($scope, $ss, $settings) {
+        // Controller for search results
         var self = this;
         self.data = {}; // current search result
         self.resultOK = false; // is result ok
@@ -98,6 +106,7 @@
     }]);
 
     app.controller("TextController", ["$scope", "kludgeService", function($scope, $ks) {
+        // Controller for user text insertion
         var self = this;
         self.insert = "";
         self.text = $ks.text || "";
@@ -115,6 +124,7 @@
     }]);
 
     app.controller("SettingsController", ["kludgeService", function($settings) {
+        // Settings controller (ks wrapper)
         var self = this;
         self.options = {};
         self.pull = function() {
