@@ -1,0 +1,47 @@
+<!-- Ouch! -->
+<div id="contentbox" ng-controller="ResultController as rc">
+    <h1>Text</h1>
+    <div id="text" ng-controller="TextController as tc" ng-mouseup="rc.update()">
+        <div class="row">
+            <input ng-show="!tc.text" type="text" class="twelve columns" placeholder="Paste here" ng-model="insert" ng-change="tc.insert()">
+            <input ng-show="tc.text" type="button" class="twelve columns" value="Clear" ng-change="tc.clear()">
+        </div>
+        <div class="row">
+            <div class="twelve columns" ng-bind-html="tc.text | rawhtml"></div>
+
+        </div>
+        <div id="resultbox" class="result-item" ng-show="tc.text">
+            <div id="result" ng-if="rc.resultOK">
+                <h2>{{rc.data.Heading}}</h2>
+                <div id="calcbox" ng-show="rc.data.AnswerType">
+                    <p>{{rc.data.Answer}}</p>
+                </div>
+                <div ng-if="rc.data.AbstractText">
+                    <p ng-show="rc.data.Abstract" ng-bind-html="rc.data.Abstract | rawhtml"></p>
+                    <p ng-show="rc.data.AbstractURL">From <a href="{{rc.data.AbstractURL}}" target="_blank">{{rc.data.AbstractSource}}</a>.
+                </div>
+                <div ng-if="!rc.data.AbstractText">
+                    <p ng-show="rc.data.AbstractURL"><a href="{{rc.data.AbstractURL}}" target="_blank">Read more on {{rc.data.AbstractSource}}.</a>
+                </div>
+                <div id="related" ng-show="rc.data.RelatedTopics">
+                    <h3>Related topics:</h3>
+                    <div ng-repeat="topic in rc.data.RelatedTopics">
+                        <div ng-if="topic.Result">
+                            <div class="related-topic" ng-bind-html="topic.Result | targetblank | rawhtml"></div>
+                        </div>
+                        <div ng-if="topic.Name">
+                            <h4>{{topic.Name}}</h4>
+                            <div ng-repeat="subtopic in topic.Topics">
+                                <div class="related-topic" ng-bind-html="subtopic.Result | targetblank | rawhtml"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                Results from <a href="http://duckduckgo.com/" target="_blank">DuckDuckGo</a>.
+            </div>
+            <div class="center big" ng-if="!rc.resultOK">
+                Select some text to start.
+            </div>
+        </div>
+    </div>
+</div>

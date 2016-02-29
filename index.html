@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html ng-app="cg">
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" charset="utf-8">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" charset="utf-8">
+        <link rel="stylesheet" href="css/master.css" charset="utf-8">
+
+        <!-- JS -->
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/1.0.0-alpha0/angular-ui-router.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript" src="js/util.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div id="nav" class="row">
+                <a class="six columns" ui-sref="text" ui-sref-active="active"><i class="fa fa-align-left"></i>Text</a>
+                <a class="six columns" ui-sref="settings" ui-sref-active="active"><i class="fa fa-cog"></i>Settings</a>
+            </div>
+            <div ui-view>
+            </div>
+        </div>
+    </body>
+</html>
