@@ -102,6 +102,9 @@
             });
             $scope.insert = ""; // clear text field
         }
+        self.clear = function() {
+            self.text = "";
+        }
     });
 
 })();
