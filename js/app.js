@@ -51,12 +51,13 @@
             });
         };
     }]);
-    app.service('settingsService', function(){
-        // this just contains settings
+    app.service('kludgeService', function(){
+        // fix application using "experimental code"
         var self = this;
         self.options = {
             related: {name: "related", text: "Show related topics", value: true}
         };
+        self.text = "";
     });
 
     app.config(function($stateProvider, $urlRouterProvider) {
@@ -75,7 +76,7 @@
         });
     });
 
-    app.controller("ResultController", ["$scope", "searchService", "settingsService", function($scope, $ss, $settings) {
+    app.controller("ResultController", ["$scope", "searchService", "kludgeService", function($scope, $ss, $settings) {
         var self = this;
         self.data = {}; // current search result
         self.resultOK = false; // is result ok
@@ -96,22 +97,24 @@
         self.options = $settings.options; // stupid and kludgy "sync"
     }]);
 
-    app.controller("TextController", function($scope) {
+    app.controller("TextController", ["$scope", "kludgeService", function($scope, $ks) {
         var self = this;
         self.insert = "";
-        self.text = "";
+        self.text = $ks.text || "";
         self.insert = function() {
             self.text = $scope.insert.replace(/\b([a-zA-Z0-9-_]+)\b/g, function(q) {
                 return "<span word='"+q.toLowerCase()+"'>"+q+"</span>"
             });
             $scope.insert = ""; // clear text field
+            $ks.text = self.text;
         }
         self.clear = function() {
             self.text = "";
+            $ks.text = self.text;
         }
-    });
+    }]);
 
-    app.controller("SettingsController", ["settingsService", function($settings) {
+    app.controller("SettingsController", ["kludgeService", function($settings) {
         var self = this;
         self.options = {};
         self.pull = function() {

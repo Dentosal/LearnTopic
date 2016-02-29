@@ -1,7 +1,6 @@
 <!-- Ouch! -->
 <div id="contentbox" ng-controller="ResultController as rc">
-    {{rc.options.related}}
-    WOLOOLOL
+    {{rc.options}}
     <div id="text" ng-controller="TextController as tc" ng-mouseup="rc.update()">
         <div class="row">
             <input ng-show="!tc.text" type="text" class="twelve columns" placeholder="Paste here" ng-model="insert" ng-change="tc.insert()">
@@ -26,7 +25,7 @@
                         <div ng-if="!rc.data.AbstractText">
                             <p ng-show="rc.data.AbstractURL"><a href="{{rc.data.AbstractURL}}" target="_blank">Read more on {{rc.data.AbstractSource}}.</a>
                         </div>
-                        <div id="related" ng-show="rc.data.RelatedTopics">
+                        <div id="related" ng-show="rc.options.related.value && rc.data.RelatedTopics">
                             <h3>Related topics:</h3>
                             <div ng-repeat="topic in rc.data.RelatedTopics">
                                 <div ng-if="topic.Result">
