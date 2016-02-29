@@ -1,4 +1,7 @@
 <div id="contentbox" class="twelve columns" ng-controller="SettingsController as sc">
     <h1>Settings</h1>
-    Show related topics: <input type="checkbox" name="name" value="">
+    <div id="options" ng-repeat="option in sc.options">
+        <label for="option_{{option.option}}">{{option.name}}</label>
+        <input id="option_{{option.option}}" type="checkbox" ng-checked="option.checked">
+    </div>
 </div>

@@ -54,7 +54,7 @@
 
     app.config(function($stateProvider, $urlRouterProvider) {
         // For any unmatched url, redirect to /state1
-        $urlRouterProvider.otherwise("/text");
+        $urlRouterProvider.otherwise("/main");
 
         // Set up the states
         $stateProvider
@@ -87,9 +87,6 @@
             }
             $("#result").scrollTop(0);
         }
-        self.scroll = function(a,b,c) {
-            console.log($scope.resultpanel);
-        }
     }]);
 
     app.controller("TextController", function($scope) {
@@ -107,4 +104,14 @@
         }
     });
 
+    app.controller("SettingsController", function() {
+        var self = this;
+        self.options = [
+            {
+                option: "show_related",
+                name: "Show related topics",
+                checked: true,
+            }
+        ]
+    });
 })();

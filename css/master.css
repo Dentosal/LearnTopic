@@ -40,6 +40,10 @@
     border: 1px solid black;
 }
 
+#options label {
+    display: inline;
+}
+
 .center {
     text-align: center;
 }

@@ -4,7 +4,7 @@
     <div id="text" ng-controller="TextController as tc" ng-mouseup="rc.update()">
         <div class="row">
             <input ng-show="!tc.text" type="text" class="twelve columns" placeholder="Paste here" ng-model="insert" ng-change="tc.insert()">
-            <input ng-show="tc.text" type="button" class="twelve columns" value="Clear" ng-change="tc.clear()">
+            <input ng-show="tc.text" type="button" class="twelve columns" value="Clear" ng-click="tc.clear()">
         </div>
         <div class="row">
             <div class="twelve columns" ng-bind-html="tc.text | rawhtml"></div>
